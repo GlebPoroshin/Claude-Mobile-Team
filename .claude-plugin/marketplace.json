@@ -1,0 +1,20 @@
+{
+  "name": "mobile-agents-marketplace",
+  "owner": {
+    "name": "AYglaz"
+  },
+  "metadata": {
+    "description": "Autonomous mobile development agents for KMP/Android/iOS",
+    "version": "2.0.0"
+  },
+  "plugins": [
+    {
+      "name": "mobile-dev-agents",
+      "description": "Autonomous multi-agent team: System Analyst, Architect, KMP/Android/iOS Developers, Test Engineer, Code Reviewer, Knowledge Manager. Clean Architecture, MVI, Ktor, SqlDelight, Koin/Kodein.",
+      "version": "2.0.0",
+      "source": "./",
+      "category": "development",
+      "tags": ["kotlin", "kmp", "android", "ios", "clean-architecture", "mvi", "mobile"]
+    }
+  ]
+}
