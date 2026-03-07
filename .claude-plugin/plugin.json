@@ -3,10 +3,10 @@
   "version": "2.0.0",
   "description": "Autonomous multi-agent development team for KMP, Android, and iOS projects. System Analyst, Architect, KMP/Android/iOS Developers, Test Engineer, Code Reviewer, Knowledge Manager.",
   "author": {
-    "name": "AYglaz",
-    "url": "https://github.com/AYglaz"
+    "name": "GlebPoroshin",
+    "url": "https://github.com/GlebPoroshin"
   },
-  "repository": "https://github.com/AYglaz/claude-mobile-agents",
+  "repository": "https://github.com/GlebPoroshin/Claude-Mobile-Team",
   "license": "MIT",
   "keywords": [
     "kotlin",
@@ -19,5 +19,8 @@
     "clean-architecture",
     "mvi",
     "mobile"
-  ]
+  ],
+  "commands": "./commands/",
+  "agents": "./agents/",
+  "skills": "./skills/"
 }

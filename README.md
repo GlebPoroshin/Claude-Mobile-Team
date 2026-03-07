@@ -21,7 +21,7 @@ A Claude Code plugin that turns Claude into an autonomous mobile development tea
 You (Manager)
     │
     ▼
-Orchestrator (CLAUDE.md)
+Orchestrator (/mobile-dev-agents:dev)
     │
     ├── System Analyst (opus)     → spec
     ├── Mobile Architect (opus)   → architecture doc
@@ -52,7 +52,7 @@ Orchestrator (CLAUDE.md)
 
 ```bash
 # Add the marketplace
-/plugin marketplace add https://github.com/AYglaz/claude-mobile-agents
+/plugin marketplace add https://github.com/GlebPoroshin/Claude-Mobile-Team
 
 # Install the plugin
 /plugin install mobile-dev-agents
@@ -61,7 +61,7 @@ Orchestrator (CLAUDE.md)
 ### Option 2: From Local Clone
 
 ```bash
-git clone https://github.com/AYglaz/claude-mobile-agents.git
+git clone https://github.com/GlebPoroshin/Claude-Mobile-Team.git
 /plugin marketplace add ./claude-mobile-agents
 /plugin install mobile-dev-agents
 ```
@@ -102,10 +102,10 @@ claude mcp add --scope user xcode -- xcodebuildmcp mcp
 
 ## Usage
 
-Just give a task and a branch name:
+Run the pipeline command with your task and branch name:
 
 ```
-Add product catalog screen with filtering and pagination. Branch SHOP-1234
+/mobile-dev-agents:dev Add product catalog screen with filtering and pagination. Branch SHOP-1234-catalog
 ```
 
 The agent team will autonomously:
@@ -124,6 +124,8 @@ You'll only be asked when external information is needed (API contracts, busines
 
 ```
 claude-mobile-agents/
+├── commands/                  # User-invocable commands
+│   └── dev.md                 # /mobile-dev-agents:dev (pipeline entry point)
 ├── agents/                    # Agent definitions
 │   ├── system-analyst.md
 │   ├── mobile-architect.md
@@ -179,9 +181,9 @@ common/feature/{name}/
 
 ### For Your Project
 
-1. Edit `~/.claude/CLAUDE.md` to match your stack
-2. Adjust agent `.md` files for your conventions
-3. Create project-specific knowledge in `~/.claude/knowledge/{project}/`
+1. Adjust agent `.md` files for your conventions
+2. Create project-specific knowledge in `~/.claude/knowledge/{project}/`
+3. Override pipeline steps in your project's `CLAUDE.md` if needed
 
 ### Knowledge Base
 
