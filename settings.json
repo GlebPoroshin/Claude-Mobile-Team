@@ -5,7 +5,24 @@
       "Bash(ast-index *)",
       "Bash(./gradlew detekt)",
       "Bash(./gradlew ktlintCheck)",
-      "Bash(./gradlew ktlintFormat)"
+      "Bash(./gradlew ktlintFormat)",
+      "Bash(./gradlew :app:assembleDebug)",
+      "Bash(./gradlew :app:assembleRelease)",
+      "Bash(./gradlew :shared:allTests)",
+      "Bash(./gradlew :app:testDebugUnitTest)",
+      "Bash(./gradlew allTests)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git checkout -b *)",
+      "Bash(git branch *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git status *)",
+      "Bash(swiftlint *)",
+      "Bash(./gradlew clean)",
+      "Bash(./gradlew build)",
+      "Bash(./gradlew installDebug)",
+      "Bash(adb *)"
     ]
   }
 }

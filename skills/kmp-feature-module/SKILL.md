@@ -8,6 +8,7 @@ autoContext: true
 # KMP Feature Module Skill
 
 Создаёт полную структуру feature-модуля по Clean Architecture.
+Все архитектурные правила — в `agents/_shared-rules.md`.
 
 ## Использование
 
@@ -31,9 +32,9 @@ common/feature/{feature-name}/
     {Feature}RepositoryImpl.kt        # Реализация Repository
   presentation/
     {Feature}ViewModel.kt             # MVI ViewModel
-    {Feature}State.kt                 # UI State
-    {Feature}Event.kt                 # UI Events
-    {Feature}Action.kt                # Side-effects
+    {Feature}State.kt                 # UI State (sealed class)
+    {Feature}Event.kt                 # UI Events (sealed class)
+    {Feature}Action.kt                # Side-effects (sealed class)
   di/
     {Feature}Module.kt                # DI module (Koin или Kodein)
 ```
@@ -52,10 +53,10 @@ data/ (реализация)
   └── RepositoryImpl (агрегатор DataSource, маппинг)
 
 presentation/ (UI логика)
-  ├── ViewModel (MVI: onEvent, state, actions)
-  ├── State (data class)
-  ├── Event (sealed interface)
-  └── Action (sealed interface)
+  ├── ViewModel (MVI: SharedViewModel<State, Event, Action>)
+  ├── State (sealed class: Loading / Content / Error)
+  ├── Event (sealed class)
+  └── Action (sealed class)
 ```
 
 ## Правила зависимостей
@@ -64,7 +65,7 @@ presentation/ (UI логика)
 - DataSource ← НЕ зависит от → DataSource
 - Repository → только DataSource
 - Repository ← НЕ зависит от → Repository
-- UseCase → только Repository
+- UseCase → только **интерфейс** Repository (не Impl)
 - ViewModel → только UseCase
 
 ## DI модуль
@@ -96,5 +97,7 @@ val {feature}Module = DI.Module("{feature}") {
 - [ ] Доменные модели без аннотаций сериализации
 - [ ] Сетевые модели с @Serializable
 - [ ] Маппинг между слоями
+- [ ] UseCase зависит от интерфейса Repository, не от Impl
+- [ ] State/Event/Action — sealed class (не sealed interface, не data class)
 - [ ] DI модуль создан и зарегистрирован
 - [ ] Зависимости между слоями корректны

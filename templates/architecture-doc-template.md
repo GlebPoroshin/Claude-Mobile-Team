@@ -96,8 +96,21 @@ class FeatureViewModel(...) : SharedViewModel<FeatureState, FeatureEvent, Featur
 - Навигация: стандартная
 
 ### expect/actual (если есть)
+- `expect` в `commonMain/` — Kotlin
+- `actual` в `androidMain/` — Kotlin
+- `actual` в `iosMain/` — **Kotlin** (НЕ Swift)
+
 ```kotlin
-expect class PlatformSpecific { ... }
+// commonMain — expect (kmp-developer пишет)
+expect class PlatformSpecific {
+    fun doSomething(): String
+}
+
+// androidMain — actual (android-developer пишет)
+actual class PlatformSpecific { ... }
+
+// iosMain — actual (ios-developer пишет, на Kotlin!)
+actual class PlatformSpecific { ... }
 ```
 
 ## DI Configuration

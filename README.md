@@ -8,11 +8,12 @@ A Claude Code plugin that turns Claude into an autonomous mobile development tea
 
 - **System Analyst** — decomposes tasks into formal specs
 - **Mobile Architect** — designs Clean Architecture solutions (api/data/presentation)
-- **KMP Developer** — implements shared layer (DataSource → Repository → UseCase → ViewModel)
-- **Android Developer** — Jetpack Compose UI, navigation, platform code
+- **KMP Developer** — implements shared layer (DataSource → Repository → UseCase → ViewModel) + unit tests
+- **Android Developer** — Jetpack Compose UI, navigation, platform code (+ unit tests for native Android)
 - **iOS Developer** — SwiftUI/UIKit, navigation, actual implementations
-- **Test Engineer** — unit tests (MockK), UI tests when needed
 - **Code Reviewer** — read-only quality gates (detekt, ktlint, architecture compliance)
+- **QA Engineer** — manual testing on emulator/simulator via Claude in Mobile MCP + XcodeBuildMCP
+- **AQA Engineer** — automated UI tests (Compose TestRule, XCUITest)
 - **Knowledge Manager** — private knowledge base for decisions and patterns
 
 ## Architecture
@@ -23,14 +24,15 @@ You (Manager)
     ▼
 Orchestrator (/mobile-dev-agents:dev)
     │
-    ├── System Analyst (opus)     → spec
-    ├── Mobile Architect (opus)   → architecture doc
-    ├── KMP Developer (sonnet)    → shared code
-    ├── Android Developer (sonnet) → Android UI
-    ├── iOS Developer (sonnet)    → iOS UI
-    ├── Test Engineer (sonnet)    → tests
-    ├── Code Reviewer (opus)      → review report
-    └── Knowledge Manager (haiku) → knowledge base
+    ├── System Analyst (opus)      → spec
+    ├── Mobile Architect (opus)    → architecture doc
+    ├── KMP Developer (sonnet)     → shared code + unit tests
+    ├── Android Developer (sonnet) → Android UI (+ unit tests for native)
+    ├── iOS Developer (sonnet)     → iOS UI
+    ├── Code Reviewer (opus)       → review report
+    ├── QA Engineer (opus)         → manual testing on emulator/simulator
+    ├── AQA Engineer (sonnet)      → automated UI tests (optional)
+    └── Knowledge Manager (haiku)  → knowledge base
 ```
 
 ## Tech Stack Support
@@ -111,12 +113,14 @@ Run the pipeline command with your task and branch name:
 The agent team will autonomously:
 1. Analyze the codebase and create a specification
 2. Design the architecture (modules, interfaces, models)
-3. Implement shared layer (DataSource, Repository, UseCase, ViewModel)
+3. Implement shared layer + unit tests (DataSource, Repository, UseCase, ViewModel)
 4. Implement platform UI (Compose / SwiftUI / UIKit)
-5. Write unit tests for every UseCase
-6. Run code review (detekt, ktlint, architecture compliance)
-7. Fix any issues found
-8. Deliver a clean branch with a report
+5. Run code review (detekt, ktlint, architecture compliance)
+6. Fix any issues found
+7. Manual QA testing on emulator/simulator (Claude in Mobile + XcodeBuildMCP)
+8. Fix bugs found by QA
+9. Automated UI tests (optional, Compose TestRule + XCUITest)
+10. Deliver a clean branch with a report
 
 You'll only be asked when external information is needed (API contracts, business logic decisions).
 
@@ -127,13 +131,15 @@ claude-mobile-agents/
 ├── commands/                  # User-invocable commands
 │   └── dev.md                 # /mobile-dev-agents:dev (pipeline entry point)
 ├── agents/                    # Agent definitions
+│   ├── _shared-rules.md       # Common rules (referenced by all agents)
 │   ├── system-analyst.md
 │   ├── mobile-architect.md
 │   ├── kmp-developer.md
 │   ├── android-developer.md
 │   ├── ios-developer.md
-│   ├── test-engineer.md
 │   ├── code-reviewer.md
+│   ├── qa-engineer.md
+│   ├── aqa-engineer.md
 │   └── knowledge-manager.md
 ├── skills/                    # Reusable skills
 │   ├── mvi-viewmodel/         # MVI ViewModel scaffolding
@@ -144,6 +150,7 @@ claude-mobile-agents/
 │   ├── spec-template.md
 │   ├── architecture-doc-template.md
 │   ├── review-report-template.md
+│   ├── bug-report-template.md
 │   └── final-report-template.md
 └── .claude-plugin/            # Plugin configuration
 ```
@@ -172,8 +179,8 @@ common/feature/{name}/
 
 ### MVI ViewModel Contract
 - One event handler method (`onEvent`)
-- `state: StateFlow<State>` for UI
-- `actions: SharedFlow<Action>` for one-shot side-effects (navigation, snackbar)
+- `viewState: StateFlow<State>` for UI (NOT `state`)
+- `viewAction: SharedFlow<Action>` for one-shot side-effects (NOT `actions`)
 - `when` on sealed event class → separate private method per event
 - No other public methods
 

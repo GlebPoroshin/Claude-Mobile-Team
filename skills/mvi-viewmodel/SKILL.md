@@ -8,6 +8,7 @@ autoContext: true
 # MVI ViewModel Skill (SharedViewModel)
 
 Создаёт ViewModel по паттерну MVI с полным набором файлов на базе `SharedViewModel<S : UiState, E : UiEvent, A : UiAction>`.
+Все правила MVI — в `agents/_shared-rules.md`.
 
 ## Использование
 
@@ -100,8 +101,8 @@ interface UiAction
 - **Action — sealed class**, реализует `UiAction`, side-effects для UI
 - **ViewModel** наследует `SharedViewModel`, переопределяет `handleEvent`
 - `when` по event → отдельный private метод на каждый event
-- Используй `updateState {}`, `sendAction()`, `currentState` — НЕ обращайся к _state/_actions напрямую
+- Используй `updateState {}`, `sendAction()`, `currentState`
 - Используй `runCatching` для обработки ошибок
 - Никаких других публичных методов кроме унаследованных
 - Каждый файл отдельно
-- `viewState` (НЕ `state`), `viewAction` (НЕ `actions`) — именование наружу
+- `viewState` (НЕ `state`), `viewAction` (НЕ `actions`)
