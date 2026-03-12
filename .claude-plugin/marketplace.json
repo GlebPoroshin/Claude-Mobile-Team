@@ -1,20 +1,20 @@
 {
-  "name": "mobile-agents-marketplace",
+  "name": "claude-mobile-team",
   "owner": {
     "name": "GlebPoroshin"
   },
   "metadata": {
-    "description": "Autonomous mobile development agents for KMP/Android/iOS",
-    "version": "2.0.0"
+    "description": "Autonomous mobile development agents for KMP/Android/iOS"
   },
   "plugins": [
     {
       "name": "mobile-dev-agents",
-      "description": "Autonomous multi-agent team: System Analyst, Architect, KMP/Android/iOS Developers, Code Reviewer, QA Engineer, AQA Engineer, Knowledge Manager. Clean Architecture, MVI, Ktor, SqlDelight, Koin/Kodein.",
+      "description": "Autonomous multi-agent team: System Analyst, Architect, KMP/Android/iOS Developers, Code Reviewer, QA Engineer, AQA Engineer, Knowledge Manager.",
       "version": "2.0.0",
-      "source": "./",
       "category": "development",
-      "tags": ["kotlin", "kmp", "android", "ios", "clean-architecture", "mvi", "mobile"]
+      "tags": ["kotlin", "kmp", "android", "ios", "clean-architecture", "mvi", "mobile"],
+      "homepage": "https://github.com/GlebPoroshin/Claude-Mobile-Team",
+      "source": "./"
     }
   ]
 }

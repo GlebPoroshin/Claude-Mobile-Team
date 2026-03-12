@@ -54,18 +54,18 @@ Orchestrator (/mobile-dev-agents:dev)
 
 ```bash
 # Add the marketplace
-/plugin marketplace add https://github.com/GlebPoroshin/Claude-Mobile-Team
+/plugin marketplace add GlebPoroshin/Claude-Mobile-Team
 
 # Install the plugin
-/plugin install mobile-dev-agents
+/plugin install mobile-dev-agents@claude-mobile-team
 ```
 
 ### Option 2: From Local Clone
 
 ```bash
 git clone https://github.com/GlebPoroshin/Claude-Mobile-Team.git
-/plugin marketplace add ./claude-mobile-agents
-/plugin install mobile-dev-agents
+/plugin marketplace add ./Claude-Mobile-Team
+/plugin install mobile-dev-agents@claude-mobile-team
 ```
 
 ### Recommended MCP Servers
