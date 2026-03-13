@@ -18,8 +18,5 @@
     "clean-architecture",
     "mvi",
     "mobile"
-  ],
-  "commands": "./commands/",
-  "agents": "./agents/",
-  "skills": "./skills/"
+  ]
 }
